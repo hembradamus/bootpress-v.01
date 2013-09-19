@@ -1,0 +1,1 @@
+(function(e){e("ul.navbar-nav li.dropdown > a").addClass("dropdown-toggle");e("a.dropdown-toggle").attr("data-toggle","dropdown").append('<b class="caret"></b>');e("ul.sub-menu").removeClass("sub-menu").addClass("dropdown-menu");console.log("butts")})(jQuery);
