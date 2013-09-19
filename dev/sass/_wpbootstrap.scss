@@ -1,0 +1,75 @@
+/* Custom styles to reconcile Bootstrap and Wordpress*/
+
+//Admin area corrections
+body.wp-admin{
+	padding-top: 0;
+	h3{
+		font-size: 1.17em;
+	}
+}
+
+//WP-Corrections
+body.logged-in{
+	padding-top: 0; //+28px for WP admin bar
+	.navbar-fixed-top{
+		top: 28px; //+28px for WP admin bar
+	}
+}
+
+.sidebar-nav {
+  ul{
+    list-style: none;
+    padding-left: 0 20px;
+    -webkit-padding-start: 20px;
+  }
+  label, h2{
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+//Conditional styles - to be dependent on whether certain elements get used in a layout
+//for use with fixed nav layouts
+.container{
+  margin-top: 110px;
+}
+
+
+
+//Bootstrap Components
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
