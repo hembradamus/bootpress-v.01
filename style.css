@@ -4962,22 +4962,74 @@ body.wp-admin {
   body.wp-admin h3 {
     font-size: 1.17em; }
 
+/* ==============================================
+                WP-Corrections
+============================================== */
+/*--- Logged-In Styles ---*/
 body.logged-in {
-  padding-top: 0; }
+  padding-top: 118px; }
   body.logged-in .navbar-fixed-top {
     top: 28px; }
 
+body.login {
+  padding-top: 0; }
+
+/*--- Regular Styles ---*/
+body {
+  min-height: 1px;
+  padding-top: 90px; }
+  body .navbar-fixed-top {
+    top: 0; }
+
 .sidebar-nav ul {
   list-style: none;
-  padding-left: 0 20px;
+  padding: 0 20px;
   -webkit-padding-start: 20px; }
 .sidebar-nav label, .sidebar-nav h2 {
   font-size: 14px;
   font-weight: 500; }
+.sidebar-nav input[type="text"] {
+  max-width: 100%; }
 
-.container {
-  margin-top: 110px; }
+/* ==============================================
+           Custom WP-Bootstrap Styles
+============================================== */
+/*--- Border Classes ---*/
+.borders {
+  border: 1pt solid #cccccc; }
 
+.borders-h {
+  border-bottom: 1pt solid #cccccc;
+  border-top: 1pt solid #cccccc; }
+
+.borders-v {
+  border-left: 1pt solid #cccccc;
+  border-right: 1pt solid #cccccc; }
+
+.border-b {
+  border-botom: 1pt solid #cccccc; }
+
+.border-t {
+  border-top: 1pt solid #cccccc; }
+
+.border-tt {
+  border-top: 3pt solid #cccccc; }
+
+.entry-header h1 {
+  max-width: 90%; }
+.entry-header .btn {
+  margin: 32px 0 20px; }
+
+.entry-title-meta {
+  clear: both;
+  margin: 2rem 0;
+  padding: 1rem 0; }
+  .entry-title-meta .divider {
+    margin: 0 1rem; }
+
+/* ==============================================
+           Additional Boostrap Styles
+============================================== */
 /*
  * Off Canvas
  * --------------------------------------------------
