@@ -47,14 +47,18 @@ if(!is_admin())
 }
 
 /**
- * Register nav menus.
+ * Register register menus and update output to match Bootstrap classes
  *
  * @since WP-Bootstrap .1
  */
+
+//Register menus
 function wpbootstrap_menus_init() {
-  register_nav_menu('header-menu',__( 'Header Menu' ));
+  register_nav_menu( 'header-menu', 'Main navigation menu' );
 }
 add_action( 'init', 'wpbootstrap_menus_init' );
+// Register Custom Navigation Walker/update menu classes and IDs
+require_once('wp_bootstrap_navwalker.php');
 
 /**
  * Registers our main widget area and the front page widget areas.
@@ -112,9 +116,79 @@ function wpbootstrap_content_nav( $html_id ) {
 /**
  * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
  *
- * TBD
+ * Create your own wpbootstrap_entry_meta() to override in a child theme.
  *
+ * @since WP-Bootstrap .1
  */
+function wpbootstrap_entry_meta_top() {
+	// Translators: used between list items, there is a space after the comma.
+	$categories_list = get_the_category_list( __( ', ', 'wpbootstrap' ) );
+
+	// Translators: used between list items, there is a space after the comma.
+	$tag_list = get_the_tag_list( '', __( ', ', 'wpbootstrap' ) );
+
+	$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
+		esc_url( get_permalink() ),
+		esc_attr( get_the_time() ),
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() )
+	);
+
+	$author = sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
+		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'wpbootstrap' ), get_the_author() ) ),
+		get_the_author()
+	);
+
+	// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
+	$utility_text = __( '<span class="by-author"> By %4$s</span><span class="divider">|</span>%3$s', 'wpbootstrap' );
+
+	printf(
+		$utility_text,
+		$categories_list,
+		$tag_list,
+		$date,
+		$author
+	);
+
+}
+function wpbootstrap_entry_meta() {
+	// Translators: used between list items, there is a space after the comma.
+	$categories_list = get_the_category_list( __( ', ', 'wpbootstrap' ) );
+
+	// Translators: used between list items, there is a space after the comma.
+	$tag_list = get_the_tag_list( '', __( ', ', 'wpbootstrap' ) );
+
+	$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
+		esc_url( get_permalink() ),
+		esc_attr( get_the_time() ),
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() )
+	);
+
+	$author = sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
+		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'wpbootstrap' ), get_the_author() ) ),
+		get_the_author()
+	);
+
+	// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
+	if ( $tag_list ) {
+		$utility_text = __( 'This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.', 'wpbootstrap' );
+	} elseif ( $categories_list ) {
+		$utility_text = __( 'This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.', 'wpbootstrap' );
+	} else {
+		$utility_text = __( 'This entry was posted on %3$s<span class="by-author"> by %4$s</span>.', 'wpbootstrap' );
+	}
+
+	printf(
+		$utility_text,
+		$categories_list,
+		$tag_list,
+		$date,
+		$author
+	);
+}
 
 /**
  * Theme customizer options.

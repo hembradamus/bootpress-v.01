@@ -36,7 +36,8 @@
         <?php wp_nav_menu( array(
           'container'     => '',
         	'menu_class' 		=> 'nav navbar-nav',
-			    'items_wrap'		=> '<ul class="%2$s">%3$s</ul>'
+			    'items_wrap'		=> '<ul class="%2$s">%3$s</ul>',
+          'walker'        => new wp_bootstrap_navwalker()
         ) ); ?>
         <!--ul class="nav navbar-nav navbar-right">
           <li><a href="http://getbootstrap.com/examples/navbar/">Default</a></li>

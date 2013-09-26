@@ -1,1 +1,1 @@
-(function(e){e("ul.navbar-nav li.dropdown > a").addClass("dropdown-toggle");e("a.dropdown-toggle").attr("data-toggle","dropdown").append('<b class="caret"></b>');e("ul.sub-menu").removeClass("sub-menu").addClass("dropdown-menu");console.log("butts")})(jQuery);
+(function(e){e("[data-toggle=offcanvas]").click(function(){e(".row-offcanvas").toggleClass("active")});console.log("butts")})(jQuery);
