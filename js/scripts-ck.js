@@ -1,1 +1,1 @@
-(function(e){e("[data-toggle=offcanvas]").click(function(){e(".row-offcanvas").toggleClass("active")});console.log("butts")})(jQuery);
+(function(e){e("[data-toggle=offcanvas]").click(function(){e(".row-offcanvas").toggleClass("active")})})(jQuery);

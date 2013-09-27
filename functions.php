@@ -112,6 +112,65 @@ function wpbootstrap_content_nav( $html_id ) {
  * TBD
  *
  */
+function twentytwelve_comment( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+	switch ( $comment->comment_type ) :
+		case 'pingback' :
+		case 'trackback' :
+		// Display trackbacks differently than normal comments.
+	?>
+	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+		<p><?php _e( 'Pingback:', 'twentytwelve' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( '(Edit)', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?></p>
+	<?php
+			break;
+		default :
+		// Proceed with normal comments.
+		global $post;
+	?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>" class="media">
+		<article id="comment-<?php comment_ID(); ?>" class="comment">
+			<section class="comment-meta comment-author vcard">
+				<?php
+					echo get_avatar( $comment, 44 );
+				?>
+			</section><!-- .comment-meta -->
+
+			<?php if ( '0' == $comment->comment_approved ) : ?>
+				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentytwelve' ); ?></p>
+			<?php endif; ?>
+
+			<section class="comment-content comment media-body">
+				<header class="comment-meta comment-author">
+					<?php 
+						printf( '<cite><b class="fn media-heading">%1$s</b> %2$s</cite>',
+							get_comment_author_link(),
+							// If current post author is also comment author, make it known visually.
+							( $comment->user_id === $post->post_author ) ? '<small class="text-muted">' . __( 'POST AUTHOR', 'twentytwelve' ) . '</small>' : ''
+						);
+					?>
+				</header>
+				<p class="pull-left">
+					<?php 
+						comment_text();
+						printf( '<a href="%1$s"><small><time datetime="%2$s">%3$s</time></small></a>',
+							esc_url( get_comment_link( $comment->comment_ID ) ),
+							get_comment_time( 'c' ),
+							/* translators: 1: date, 2: time */
+							sprintf( __( '%1$s at %2$s', 'twentytwelve' ), get_comment_date(), get_comment_time() )
+						);
+					 ?>
+					<?php edit_comment_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'twentytwelve' ), 'after' => ' <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+				</p>
+			</section><!-- .comment-content -->
+
+			<div class="reply">
+			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+	<?php
+		break;
+	endswitch; // end comment_type check
+}
 
 /**
  * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.

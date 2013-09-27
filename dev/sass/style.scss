@@ -1,7 +1,7 @@
 /*
-Theme Name: WP-Bootstrap
+Theme Name: BootPress
 Theme URI: 
-Description: Basic Wordpress theme built from Twitter Bootstrap 3.0.0 components. Developed in Wordpress 3.6.1
+Description: BootPress' primary goal is to provide as clean and scalable a foundation as possible for building Bootstrap-based themes. This themes template files emulate a standard WordPress Twenty_____ theme, but rely on soley on Bootstrap for styling and respnosiveness in order to eliminate conflicts and redundancies from other themes. In addition to providing a cleaner starting point, BootPress also incorporates Bootstrap completely separate from its template files in order to make future Bootstrap updates more painless and reversible. For more information, see ____________________. 
 Version: .1
 Tags: bootstrap, twitter bootstrap, responsive, two-thirds
 Author: Randy Hembrador
@@ -10,4 +10,5 @@ Author URI: http://randyhembrador.com/
 
 @import '_bootstrap.min';
 @import '_navbar-fixed-top';
+@import '_bootstrapValues';
 @import '_wpbootstrap';
