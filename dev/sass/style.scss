@@ -1,14 +1,13 @@
 /*
 Theme Name: BootPress
 Theme URI: 
-Description: BootPress' primary goal is to provide as clean and scalable a foundation as possible for building Bootstrap-based themes. This themes template files emulate a standard WordPress Twenty_____ theme, but rely on soley on Bootstrap for styling and respnosiveness in order to eliminate conflicts and redundancies from other themes. In addition to providing a cleaner starting point, BootPress also incorporates Bootstrap completely separate from its template files in order to make future Bootstrap updates more painless and reversible. For more information, see ____________________. 
+Description: BootPress strives to provide the cleanest and most scalable foundation possible for building Bootstrap-based themes. This theme's template files emulate a standard WordPress Twenty-xxxxx theme, but rely on soley on Bootstrap for styling and respnosiveness in order to eliminate conflicts and redundancies from other themes. Additionally, BootPress's template files do not directly contain any Bootstrap classes so that themes built on top of it can incorporate future Bootstrap updates more painlessly/reversibly.
 Version: .1
-Tags: bootstrap, twitter bootstrap, responsive, two-thirds
+Tags: bootstrap, twitter bootstrap, bootpress, mobile, responsive, two-thirds
 Author: Randy Hembrador
 Author URI: http://randyhembrador.com/
 */
 
 @import '_bootstrap.min';
-@import '_navbar-fixed-top';
-@import '_bootstrapValues';
-@import '_wpbootstrap';
+@import '_bpRig';
+@import '_bpReconciler';

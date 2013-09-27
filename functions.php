@@ -19,57 +19,57 @@
  * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
  *
  * @package WordPress
- * @subpackage wpbootstrap
- * @since WP-Bootstrap .1
+ * @subpackage bootpress
+ * @since BootPress .1
  */
 
 /**
  * Enqueues default theme style and Twitter Bootstrap scripts and styles for front-end.
  *
- * @since WP-Bootstrap .1
+ * @since BootPress .1
  */
-function wpbootstrap_scripts_styles() {
+function bootpress_scripts_styles() {
 	//Adds JavaScript to pages with the comment form to support sites with threaded comments (when in use).
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
 		wp_enqueue_script( 'comment-reply' );
 
 	//Load main stylesheet
-	wp_enqueue_style( 'wpbootstrap-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'bootpress-style', get_stylesheet_uri() );
 
 	//Load Bootstrap js and theme scripts
 	wp_enqueue_script( 'bootstrapJS', get_bloginfo('stylesheet_directory') . '/js/bootstrap.min.js' , array( 'jquery' ));
-	wp_enqueue_script( 'wpbootstrapJS', get_bloginfo('stylesheet_directory') . '/js/scripts-ck.js', array( 'bootstrapJS' ), false, true );
+	wp_enqueue_script( 'bootPressJS', get_bloginfo('stylesheet_directory') . '/js/scripts-ck.js', array( 'bootstrapJS' ), false, true );
 
 }
 if(!is_admin())
 {
-	add_action( 'init', 'wpbootstrap_scripts_styles' );
+	add_action( 'init', 'bootpress_scripts_styles' );
 }
 
 /**
  * Register register menus and update output to match Bootstrap classes
  *
- * @since WP-Bootstrap .1
+ * @since BootPress .1
  */
 
 //Register menus
-function wpbootstrap_menus_init() {
+function bootpress_menus_init() {
   register_nav_menu( 'header-menu', 'Main navigation menu' );
 }
-add_action( 'init', 'wpbootstrap_menus_init' );
+add_action( 'init', 'bootpress_menus_init' );
 // Register Custom Navigation Walker/update menu classes and IDs
 require_once('wp_bootstrap_navwalker.php');
 
 /**
  * Registers our main widget area and the front page widget areas.
  *
- * @since WP-Bootstrap .1
+ * @since BootPress .1
  */
-function wpbootstrap_widgets_init() {
+function bootpress_widgets_init() {
 	register_sidebar( array(
-		'name' => __( 'Main Sidebar', 'wpbootstrap' ),
+		'name' => __( 'Main Sidebar', 'bootpress' ),
 		'id' => 'sidebar-1',
-		'description' => __( 'Appears on posts and pages. Exceptions TBD in WP Bootstrap', 'wpbootstrap' ),
+		'description' => __( 'Appears on posts and pages. Exceptions TBD in WP Bootstrap', 'bootpress' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
@@ -77,42 +77,68 @@ function wpbootstrap_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'First Front Page Widget Area', 'wpbootstrap' ),
+		'name' => __( 'First Front Page Widget Area', 'bootpress' ),
 		'id' => 'sidebar-2',
-		'description' => __( 'Locations TBD in WP Bootstrap', 'wpbootstrap' ),
+		'description' => __( 'Locations TBD in WP Bootstrap', 'bootpress' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
 }
-add_action( 'widgets_init', 'wpbootstrap_widgets_init' );
+add_action( 'widgets_init', 'bootpress_widgets_init' );
 
 /**
  * Displays navigation to next/previous pages when applicable. Uses Bootstrap .pager structure
  *
- * @since WP-Bootstrap .1
+ * @since BootPress .1
  */
-function wpbootstrap_content_nav( $html_id ) {
+function bootpress_paging_nav( $html_id ) {
 	global $wp_query;
 
 	$html_id = esc_attr( $html_id );
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
+		<nav class="paging-navigation">
 		<ul id="<?php echo $html_id; ?>" class="pager" role="navigation">
-		  <li class="previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older', 'wpbootstrap' ) ); ?></li>
-		  <li class="next"><?php previous_posts_link( __( 'Newer <span class="meta-nav">&rarr;</span>', 'wpbootstrap' ) ); ?></li>
+		  <li class="previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older', 'bootpress' ) ); ?></li>
+		  <li class="next"><?php previous_posts_link( __( 'Newer <span class="meta-nav">&rarr;</span>', 'bootpress' ) ); ?></li>
 		</ul><!-- #<?php echo $html_id; ?> .navigation -->
+		</nav>
 	<?php endif;
 }
+/**
+ * Displays navigation to next/previous post when applicable.
+*
+* @since Twenty Thirteen 1.0
+*
+* @return void
+*/
+function bootpress_post_nav() {
+	global $post;
 
+	// Don't print empty markup if there's nowhere to navigate.
+	$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
+	$next     = get_adjacent_post( false, '', false );
+
+	if ( ! $next && ! $previous )
+		return;
+	?>
+		<nav class="post-navigation">
+			<ul role="navigation">
+			  <li class="previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'bootpress' ) . '</span> %title' ); ?></li>
+			  <li class="next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'bootpress' ) . '</span>' ); ?></li>
+			</ul>
+		</nav><!-- .post-navigation -->
+	<?php
+}
 /**
  * Template for comments and pingbacks.
  *
  * TBD
  *
  */
-function twentytwelve_comment( $comment, $args, $depth ) {
+function bootpress_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
 		case 'pingback' :
@@ -120,7 +146,7 @@ function twentytwelve_comment( $comment, $args, $depth ) {
 		// Display trackbacks differently than normal comments.
 	?>
 	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-		<p><?php _e( 'Pingback:', 'twentytwelve' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( '(Edit)', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?></p>
+		<p><?php _e( 'Pingback:', 'bootpress' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( '(Edit)', 'bootpress' ), '<span class="edit-link">', '</span>' ); ?></p>
 	<?php
 			break;
 		default :
@@ -136,7 +162,7 @@ function twentytwelve_comment( $comment, $args, $depth ) {
 			</section><!-- .comment-meta -->
 
 			<?php if ( '0' == $comment->comment_approved ) : ?>
-				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentytwelve' ); ?></p>
+				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'bootpress' ); ?></p>
 			<?php endif; ?>
 
 			<section class="comment-content comment media-body">
@@ -145,22 +171,22 @@ function twentytwelve_comment( $comment, $args, $depth ) {
 						printf( '<cite><b class="fn media-heading">%1$s</b> %2$s</cite>',
 							get_comment_author_link(),
 							// If current post author is also comment author, make it known visually.
-							( $comment->user_id === $post->post_author ) ? '<small class="text-muted">' . __( 'POST AUTHOR', 'twentytwelve' ) . '</small>' : ''
+							( $comment->user_id === $post->post_author ) ? '<small>' . __( 'POST AUTHOR', 'bootpress' ) . '</small>' : ''
 						);
 					?>
 				</header>
-				<p class="pull-left">
+				<p class="comment-body-p">
 					<?php 
 						comment_text();
 						printf( '<a href="%1$s"><small><time datetime="%2$s">%3$s</time></small></a>',
 							esc_url( get_comment_link( $comment->comment_ID ) ),
 							get_comment_time( 'c' ),
 							/* translators: 1: date, 2: time */
-							sprintf( __( '%1$s at %2$s', 'twentytwelve' ), get_comment_date(), get_comment_time() )
+							sprintf( __( '%1$s at %2$s', 'bootpress' ), get_comment_date(), get_comment_time() )
 						);
 					 ?>
-					<?php edit_comment_link( __( 'Edit', 'twentytwelve' ), '<span class="edit-link">', '</span>' ); ?>
-					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'twentytwelve' ), 'after' => ' <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+					<?php edit_comment_link( __( 'Edit', 'bootpress' ), '<span class="edit-link">', '</span>' ); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'bootpress' ), 'after' => ' <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 				</p>
 			</section><!-- .comment-content -->
 
@@ -175,16 +201,16 @@ function twentytwelve_comment( $comment, $args, $depth ) {
 /**
  * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
  *
- * Create your own wpbootstrap_entry_meta() to override in a child theme.
+ * Create your own bootpress_entry_meta() to override in a child theme.
  *
- * @since WP-Bootstrap .1
+ * @since BootPress .1
  */
-function wpbootstrap_entry_meta_top() {
+function bootpress_entry_meta_top() {
 	// Translators: used between list items, there is a space after the comma.
-	$categories_list = get_the_category_list( __( ', ', 'wpbootstrap' ) );
+	$categories_list = get_the_category_list( __( ', ', 'bootpress' ) );
 
 	// Translators: used between list items, there is a space after the comma.
-	$tag_list = get_the_tag_list( '', __( ', ', 'wpbootstrap' ) );
+	$tag_list = get_the_tag_list( '', __( ', ', 'bootpress' ) );
 
 	$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
 		esc_url( get_permalink() ),
@@ -195,12 +221,12 @@ function wpbootstrap_entry_meta_top() {
 
 	$author = sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_attr( sprintf( __( 'View all posts by %s', 'wpbootstrap' ), get_the_author() ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'bootpress' ), get_the_author() ) ),
 		get_the_author()
 	);
 
 	// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
-	$utility_text = __( '<span class="by-author"> By %4$s</span><span class="divider">|</span>%3$s', 'wpbootstrap' );
+	$utility_text = __( '<span class="by-author"> By %4$s</span><span class="divider">|</span>%3$s', 'bootpress' );
 
 	printf(
 		$utility_text,
@@ -211,12 +237,12 @@ function wpbootstrap_entry_meta_top() {
 	);
 
 }
-function wpbootstrap_entry_meta() {
+function bootpress_entry_meta() {
 	// Translators: used between list items, there is a space after the comma.
-	$categories_list = get_the_category_list( __( ', ', 'wpbootstrap' ) );
+	$categories_list = get_the_category_list( __( ', ', 'bootpress' ) );
 
 	// Translators: used between list items, there is a space after the comma.
-	$tag_list = get_the_tag_list( '', __( ', ', 'wpbootstrap' ) );
+	$tag_list = get_the_tag_list( '', __( ', ', 'bootpress' ) );
 
 	$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
 		esc_url( get_permalink() ),
@@ -227,17 +253,17 @@ function wpbootstrap_entry_meta() {
 
 	$author = sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_attr( sprintf( __( 'View all posts by %s', 'wpbootstrap' ), get_the_author() ) ),
+		esc_attr( sprintf( __( 'View all posts by %s', 'bootpress' ), get_the_author() ) ),
 		get_the_author()
 	);
 
 	// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
 	if ( $tag_list ) {
-		$utility_text = __( 'This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.', 'wpbootstrap' );
+		$utility_text = __( 'This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.', 'bootpress' );
 	} elseif ( $categories_list ) {
-		$utility_text = __( 'This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.', 'wpbootstrap' );
+		$utility_text = __( 'This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.', 'bootpress' );
 	} else {
-		$utility_text = __( 'This entry was posted on %3$s<span class="by-author"> by %4$s</span>.', 'wpbootstrap' );
+		$utility_text = __( 'This entry was posted on %3$s<span class="by-author"> by %4$s</span>.', 'bootpress' );
 	}
 
 	printf(

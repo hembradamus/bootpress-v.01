@@ -1,32 +1,62 @@
-/* Custom styles to reconcile Bootstrap and Wordpress*/
+/**
+ * BootPress Reconciler
+ *
+ The following styles perform the following functions:
+  - Address Bootstrap conflicts with WordPress admin functions
+  - Provide style for WordPress elements that don't have a direct Bootstrap equivalent
 
-//Undo Bootstrap Styles in Admin
-body.wp-admin{
-	padding-top: 0;
-	h3{
-		font-size: 1.17em;
-	}
-}
+ Custom styles use dimensions and media query structures already found in Bootstrap wherever possible (these dimensions/media queries are defined in the file "_bootstrapValues"). 
+
+ This theme only introduces original values where some degree of style is necessary for basic readability, and Bootstrap equivalents are completely non-existent (any style containing these types of values can be found in the section "Purely BootPress custom styles")
+ *
+ * Based on Bootstrap v3.0.0
+ *
+ */
+
 
 /* ==============================================
-    WP elements not addressed by Bootstrap
+    BootPress variables
 ============================================== */
 
-$adminHeight: 28px;  //+28px for WP admin bar
+//WordPress admin bar height
+$adminHeight: 28px;
+
+//Top padding for container
 $bootpressTopPadding: 90px;
 
-/*--- Logged-In Styles ---*/
+//Border styles for major layout elements
+$bColor: #e5e5e5;
+$bThick: 3pt;
+$bThin: 1pt;
+$thinBorder: $bThin solid $bColor;
+
+
+/* ==============================================
+    WP Admin fixes
+============================================== */
+
+body.login{
+  padding-top: 0;
+}
 body.logged-in{
   padding-top: $bootpressTopPadding + $adminHeight;
   .navbar-fixed-top{
     top: $adminHeight;
   }
 }
-body.login{
+//Restore WP defaults overwritten by Bootstrap
+body.wp-admin{
   padding-top: 0;
+  h3{
+    font-size: 1.17em;
+  }
 }
 
-/*--- Regular Styles ---*/
+
+/* ==============================================
+    Purely BootPress custom styles
+============================================== */
+
 body{
   min-height: 1px;
   padding-top: $bootpressTopPadding;
@@ -35,6 +65,38 @@ body{
   }
 }
 
+.entry-header{
+  h1{
+    max-width: 90%;
+  }
+  .btn{
+    margin: 32px 0 20px;
+  }
+}
+
+.entry-title-meta{
+  border-bottom: $thinBorder;
+  border-top: $thinBorder;
+  clear: both;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  .divider{
+    margin: 0 1rem;
+  }
+}
+.post-navigation{
+  border-bottom: $thinBorder;
+  border-top: $thinBorder;  
+}
+
+
+/* ==============================================
+    Bootstrap-based custom styles
+    (based on Bootstrap v3.0.0)
+============================================== */
+
+
+/*--- Sidebars ---*/
 .sidebar-nav {
   ul{
     list-style: none;
@@ -50,11 +112,11 @@ body{
     }
   }
   label, h2{
-    font-size: 14px;
+    font-size: $font-size-base;
     font-weight: 500;
   }
   input[type="text"]{
-    max-width: 100%;
+    width: 100%;
   }
 }
 #submit{
@@ -63,43 +125,7 @@ body{
 }
 
 
-/* ==============================================
-        Styles for WordPress elements
-        with no Bootstrap analog
-============================================== */
-
-/*--- Border Classes ---*/
-
-$bColor: #e5e5e5;
-$bThick: 3pt;
-$bThin: 1pt;
-.borders-h{
-  border-bottom: $bThin solid $bColor;
-  border-top: $bThin solid $bColor;
-}
-
-/*--- Layout Elements ---*/
-
-$ltGray: #e0e0e0;
-
-.entry-header{
-  h1{
-    max-width: 90%;
-  }
-  .btn{
-    margin: 32px 0 20px;
-  }
-}
-.entry-title-meta{
-  clear: both;
-  margin: 2rem 0;
-  padding: 1rem 0;
-  .divider{
-    margin: 0 1rem;
-  }
-}
-
-/*--- Comment content styles ---*/
+/*--- Comments ---*/
 li.comment > .comment{
   padding: $padding-base-vertical $padding-base-horizonal $padding-base-vertical  0;
   @media screen and (max-width: $screen-xs){
@@ -123,11 +149,13 @@ li.comment > .comment{
   @media screen and (min-width: $screen-lg){
     margin: 0 $padding-large-horizonal 0 0;
   }
-  @extend .pull-left;
 }
 
+
+
 /* ==============================================
-           Additional Boostrap Styles
+    Official Bootstrap extension styles
+    (from Bootstrap v3.0.0)
 ============================================== */
 /*
  * Off Canvas

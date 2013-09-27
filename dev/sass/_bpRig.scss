@@ -1,0 +1,215 @@
+/**
+ * BootPress Rig
+ *
+All direct rigs of Bootstrap classes onto WordPress elements. Bootstrap classes have not been directly included in the template files as an attempt to facilitate easier updates whenever Bootstrap itself updates. Feedback definitely welcome as to whether this CSS Preprocessor approach is the best approach for integrating Bootstrap while keeping it relatively self-contained/separate from the template files.
+
+Some known drawbacks of this approach is that it makes the final style.css file significantly longer and that Bootstrap styles are much harder to isolate via Firebug. Another approach I considered that would address those issues is a jQuery style sheet with addClass methods applied to all relevant WordPress elements (I'm personally unaware if that approach might cause significant compatability issues with older browsers/currently the giant stylesheet trade off sounded preferable).
+
+One other issue I'm aware of is that a LESS implementation that uses Bootstrap's actual development files would provide an even cleaner development environment/I aim to include one in a future version of this theme once I actually learn LESS : )  
+ *
+ * Based on Bootstrap v3.0.0
+ *
+ */
+
+
+/* ==============================================
+    Bootstrap variables (from v3.0.0)
+============================================== */
+
+//Typography
+$font-family-sans-serif: 'Helvetica-Neue', Helvetica, Arial, sans-serif;
+$font-family-base: $font-family-sans-serif;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif;
+$font-size-base: 14px;
+$font-family-monospace: Monaco, Menlo, Consolas, 'Courier New', monospace;
+$line-height-base: 1.428571429;
+
+
+// Media query breakpoints
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+
+
+// Container sizes
+$container-tablet: 728px;
+$container-desktop: 940px;
+$container-lg-desktop: 1170px;
+
+
+// Grid system
+$grid-gutter-width: 30px;
+
+
+// Padding
+$padding-base-vertical: 8px;
+$padding-base-horizonal: 12px;
+$padding-large-vertical: 14px;
+$padding-large-horizonal: 16px;
+$padding-small-vertical: 5px;
+$padding-small-horizonal: 10px;
+
+
+
+/* ==============================================
+    Nav
+============================================== */
+
+//From index.php
+#site-navigation{
+	@extend .navbar;
+	@extend .navbar-default;
+	@extend .navbar-fixed-top;
+}
+#navhead{
+	@extend .navbar-header;
+	#brand{
+		@extend .navbar-brand;
+	}
+	button{
+		@extend .navbar-toggle;
+	}
+}
+#navchoices{
+	@extend .navbar-collapse;
+	@extend .collapse;
+}
+
+//From functions.php
+.paging-navigation, .post-navigation{
+	@extend .col-12;
+	@extend .pager;
+}
+
+/* ==============================================
+    Page Layouts
+============================================== */
+
+//From index.php, single.php and page.php
+#primary{
+	@extend .container;
+}
+.sidebar-layout{
+	@extend .row;
+	@extend .row-offcanvas;
+	@extend .row-offcanvas-right;
+	#content {
+		@extend .col-xs-12;
+		@extend .col-sm-8;
+		@extend .col-md-7;
+	}
+}
+
+.flank{
+	@extend .col-md-1;
+}
+
+
+/* ==============================================
+    Entry Headers and Footers
+============================================== */
+
+//From content.php
+h1.entry-title{
+	@extend .pull-left;
+}
+button.edit-link{
+	@extend .button;
+	@extend .btn;
+	@extend .btn-primary;
+	@extend .btn-xs;
+	@extend .pull-right;
+}
+.entry-title-meta{
+	@extend .text-muted;
+	.leave-reply, .has-replies {
+		@extend .pull-right;
+	}
+	.has-replies {
+		@extend .badge;
+	}
+}
+
+.entry-footer-meta{
+	@extend .text-muted;
+}
+
+
+/* ==============================================
+    Main Content
+============================================== */
+
+//From index.php
+.excerpt{
+	@extend .col-12;
+	.time{
+		@extend .text-muted;
+	}
+	.readmore{
+		@extend .btn;
+		@extend .btn-default;
+	}
+}
+
+
+/* ==============================================
+    Sidebars
+============================================== */
+
+//From index.php, single.php and page.php
+#sidebarToggle{
+ @extend .pull-right;
+ @extend .visible-xs;
+ @extend .btn;
+ @extend .btn-primary;
+ @extend .btn-xs;
+}
+
+#sidebar-container{
+	@extend .col-xs-12;
+	@extend .col-sm-4;
+	@extend .col-md-3;
+	@extend .sidebar-offcanvas;
+}
+#sidebar{
+	@extend .well;
+	@extend .sidebar-nav;
+}
+
+
+/* ==============================================
+    Comments
+============================================== */
+
+//From comments.php
+textarea#comment {
+	@extend .col-xs-12;
+}
+
+//From functions.php
+.comment-author.vcard{
+  @extend .pull-left;
+ }
+ .comment-author cite small{
+ 	@extend .text-muted;
+ }
+ .comment-body-p {
+ 	@extend .pull-left;
+ }
+
+
+/* ==============================================
+    Footer
+============================================== */
+
+//From footer.php
+footer#colophon {
+	@extend .row;
+}
+.site-info {
+	@extend .col-xs-12;
+}
+
+
+
