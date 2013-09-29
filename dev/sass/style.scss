@@ -1,7 +1,11 @@
 /*
 Theme Name: BootPress
 Theme URI: 
-Description: BootPress strives to provide the cleanest and most scalable foundation possible for building Bootstrap-based themes. This theme's template files emulate a standard WordPress Twenty-xxxxx theme, but rely on soley on Bootstrap for styling and respnosiveness in order to eliminate conflicts and redundancies from other themes. Additionally, BootPress's template files do not directly contain any Bootstrap classes so that themes built on top of it can incorporate future Bootstrap updates more painlessly/reversibly.
+Description: BootPress strives to reconcile Bootstrap and WordPress using the least amount of outside elements possible.
+
+Custom styles are only introduced where absolute necessary to address Bootstrap/WordPress conflicts (i.e. in the admin section) or provide basic readability for WP elements that lack a direct BS equivalent (and in those cases, BootPress custom styles use dimensions and media query structures already present in Bootstrap to the maximum extent possible). BootPress does not contain any custom styles for the sake of aesthetics or any style or responsiveness solutions from other themes, and aims to provide users with the purest Bootstrap-based foundation possible for custom themes.
+
+In addition to its minimal use of amount non-Bootstrap styles, BootPress manages Bootstrap's classes completely separate from its template files in order to make future Bootstrap updates more painless.
 Version: .1
 Tags: bootstrap, twitter bootstrap, bootpress, mobile, responsive, two-thirds
 Author: Randy Hembrador
@@ -9,5 +13,4 @@ Author URI: http://randyhembrador.com/
 */
 
 @import '_bootstrap.min';
-@import '_bpRig';
 @import '_bpReconciler';

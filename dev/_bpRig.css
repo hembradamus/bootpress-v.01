@@ -10,166 +10,24 @@ One other issue I'm aware of is that a LESS implementation that uses Bootstrap's
  * Based on Bootstrap v3.0.0
  *
  */
-
-
 /* ==============================================
     Nav
 ============================================== */
-
-//From index.php
-#site-navigation{
-	@extend .navbar;
-	@extend .navbar-default;
-	@extend .navbar-fixed-top;
-}
-#navhead{
-	@extend .navbar-header;
-	#brand{
-		@extend .navbar-brand;
-	}
-	button{
-		@extend .navbar-toggle;
-	}
-}
-.navchoices{
-	@extend .navbar-collapse;
-	@extend .collapse;
-}
-
-//From functions.php
-.paging-navigation, .post-navigation{
-	@extend .col-12;
-	@extend .pager;
-}
-
 /* ==============================================
     Page Layouts
 ============================================== */
-
-//From index.php, single.php and page.php
-#primary{
-	@extend .container;
-}
-.sidebar-layout{
-	@extend .row;
-	@extend .row-offcanvas;
-	@extend .row-offcanvas-right;
-	#content {
-		@extend .col-xs-12;
-		@extend .col-sm-8;
-		@extend .col-md-7;
-	}
-}
-
-.flank{
-	@extend .col-md-1;
-}
-
-
 /* ==============================================
     Entry Headers and Footers
 ============================================== */
-
-//From content.php
-h1.entry-title{
-	@extend .pull-left;
-}
-button.edit-link{
-	@extend .button;
-	@extend .btn;
-	@extend .btn-primary;
-	@extend .btn-xs;
-	@extend .pull-right;
-}
-.entry-title-meta{
-	@extend .text-muted;
-	.leave-reply, .has-replies {
-		@extend .pull-right;
-	}
-	.has-replies {
-		@extend .badge;
-	}
-}
-
-.entry-footer-meta{
-	@extend .text-muted;
-}
-
-
 /* ==============================================
     Main Content
 ============================================== */
-
-//From index.php
-.excerpt{
-	@extend .col-12;
-	.time{
-		@extend .text-muted;
-	}
-	.readmore{
-		@extend .btn;
-		@extend .btn-default;
-	}
-}
-
-
 /* ==============================================
     Sidebars
 ============================================== */
-
-//From index.php, single.php and page.php
-#sidebar-toggle{
- @extend .pull-right;
- @extend .visible-xs;
- @extend .btn;
- @extend .btn-primary;
- @extend .btn-xs;
-}
-
-#sidebar-container{
-	@extend .col-xs-12;
-	@extend .col-sm-4;
-	@extend .col-md-3;
-	@extend .sidebar-offcanvas;
-}
-#sidebar{
-	@extend .well;
-	@extend .sidebar-nav;
-}
-
-
 /* ==============================================
     Comments
 ============================================== */
-
-//From comments.php
-textarea#comment {
-	@extend .col-xs-12;
-}
-
-//From functions.php
-.comment-author.vcard{
-  @extend .pull-left;
- }
- .comment-author cite small{
- 	@extend .text-muted;
- }
- .comment-body-p {
- 	@extend .pull-left;
- }
-
-
 /* ==============================================
     Footer
 ============================================== */
-
-//From footer.php
-footer#colophon {
-	@extend .row;
-}
-.site-info {
-	@extend .col-xs-12;
-}
-
-
-

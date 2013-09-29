@@ -14,7 +14,7 @@ get_header(); ?>
         <div class="flank">
         </div><!--/span-->
         <div id="content">
-          <button id="sidebarToggle" type="button" data-toggle="offcanvas">Toggle Sidebar</button>
+          <button id="sidebar-toggle" type="button" data-toggle="offcanvas">Toggle Sidebar</button>
     			<?php 
     				if ( have_posts() ) : while ( have_posts() ) : the_post();
     			?>

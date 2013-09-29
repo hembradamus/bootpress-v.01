@@ -15,8 +15,10 @@
 
 
 /* ==============================================
-    BootPress variables
+    Variables
 ============================================== */
+
+/*--- BootPress Variables ---*/
 
 //WordPress admin bar height
 $adminHeight: 28px;
@@ -29,6 +31,42 @@ $bColor: #e5e5e5;
 $bThick: 3pt;
 $bThin: 1pt;
 $thinBorder: $bThin solid $bColor;
+
+/*Bootstrap values (from v3.0.0) ---*/
+
+//Typography
+$font-family-sans-serif: 'Helvetica-Neue', Helvetica, Arial, sans-serif;
+$font-family-base: $font-family-sans-serif;
+$font-family-serif: Georgia, 'Times New Roman', Times, serif;
+$font-size-base: 14px;
+$font-family-monospace: Monaco, Menlo, Consolas, 'Courier New', monospace;
+$line-height-base: 1.428571429;
+
+
+// Media query breakpoints
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+
+
+// Container sizes
+$container-tablet: 728px;
+$container-desktop: 940px;
+$container-lg-desktop: 1170px;
+
+
+// Grid system
+$grid-gutter-width: 30px;
+
+
+// Padding
+$padding-base-vertical: 8px;
+$padding-base-horizonal: 12px;
+$padding-large-vertical: 14px;
+$padding-large-horizonal: 16px;
+$padding-small-vertical: 5px;
+$padding-small-horizonal: 10px;
 
 
 /* ==============================================
