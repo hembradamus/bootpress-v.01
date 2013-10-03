@@ -11,8 +11,6 @@ get_header(); ?>
 
   <div id="primary">
       <div class="sidebar-layout">
-        <div class="flank">
-        </div><!--/span-->
         <div id="content">
           <button id="sidebar-toggle" type="button" data-toggle="offcanvas">Toggle Sidebar</button>
     			<?php 
@@ -35,8 +33,6 @@ get_header(); ?>
 
         <div id="sidebar-container" role="navigation">
          	<?php get_sidebar(); ?>
-        </div><!--/span-->
-        <div class="flank">
         </div><!--/span-->
       </div><!--/row row-offcanvas-right-->
 

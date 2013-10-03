@@ -37,8 +37,8 @@ function bootpress_scripts_styles() {
 	wp_enqueue_style( 'bootpress-style', get_stylesheet_uri() );
 
 	//Load Bootstrap js and theme scripts
-	wp_enqueue_script( 'bootstrapJS', get_bloginfo('stylesheet_directory') . '/js/bootstrap.min.js' , array( 'jquery' ));
-	wp_enqueue_script( 'bootPressJS', get_bloginfo('stylesheet_directory') . '/js/scripts-ck.js', array( 'bootstrapJS' ), false, true );
+	wp_enqueue_script( 'bootstrapJS', get_bloginfo('template_directory') . '/js/bootstrap.min.js' , array( 'jquery' ));
+	wp_enqueue_script( 'bootPressJS', get_bloginfo('template_directory') . '/js/scripts-ck.js', array( 'bootstrapJS' ), false, true );
 
 }
 if(!is_admin())
@@ -69,7 +69,7 @@ function bootpress_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Main Sidebar', 'bootpress' ),
 		'id' => 'sidebar-1',
-		'description' => __( 'Appears on posts and pages. Exceptions TBD in WP Bootstrap', 'bootpress' ),
+		'description' => __( 'Appears on posts and pages. Exceptions TBD in BootPress', 'bootpress' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
@@ -77,9 +77,19 @@ function bootpress_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'First Front Page Widget Area', 'bootpress' ),
-		'id' => 'sidebar-2',
-		'description' => __( 'Locations TBD in WP Bootstrap', 'bootpress' ),
+		'name' => __( 'Navbar Widget Area', 'bootpress' ),
+		'id' => 'navwidgets',
+		'description' => __( 'Widget area for right half of navabar', 'bootpress' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+	) );
+
+	register_sidebar( array(
+		'name' => __( 'Footer Widget Area', 'bootpress' ),
+		'id' => 'footerwidgets',
+		'description' => __( 'Locations TBD in  BootPress', 'bootpress' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
@@ -87,6 +97,16 @@ function bootpress_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'bootpress_widgets_init' );
+
+/**
+ * Add theme support for different post types
+ *
+ * @since BootPress .1
+ */
+function bootpress_theme_support() {
+	add_theme_support( 'post-formats', array( 'gallery') );
+}
+add_action( 'init', 'bootpress_theme_support' );
 
 /**
  * Displays navigation to next/previous pages when applicable. Uses Bootstrap .pager structure
@@ -99,11 +119,11 @@ function bootpress_paging_nav( $html_id ) {
 	$html_id = esc_attr( $html_id );
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
-		<nav class="paging-navigation">
-		<ul id="<?php echo $html_id; ?>" class="pager" role="navigation">
-		  <li class="previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older', 'bootpress' ) ); ?></li>
-		  <li class="next"><?php previous_posts_link( __( 'Newer <span class="meta-nav">&rarr;</span>', 'bootpress' ) ); ?></li>
-		</ul><!-- #<?php echo $html_id; ?> .navigation -->
+		<nav id="paging-navigation">
+			<ul id="<?php echo $html_id; ?>" role="navigation">
+			  <li class="previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older', 'bootpress' ) ); ?></li>
+			  <li class="next"><?php previous_posts_link( __( 'Newer <span class="meta-nav">&rarr;</span>', 'bootpress' ) ); ?></li>
+			</ul><!-- #<?php echo $html_id; ?> .navigation -->
 		</nav>
 	<?php endif;
 }
@@ -124,7 +144,7 @@ function bootpress_post_nav() {
 	if ( ! $next && ! $previous )
 		return;
 	?>
-		<nav class="post-navigation">
+		<nav id="post-navigation">
 			<ul role="navigation">
 			  <li class="previous"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'bootpress' ) . '</span> %title' ); ?></li>
 			  <li class="next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'bootpress' ) . '</span>' ); ?></li>
@@ -259,11 +279,11 @@ function bootpress_entry_meta() {
 
 	// Translators: 1 is category, 2 is tag, 3 is the date and 4 is the author's name.
 	if ( $tag_list ) {
-		$utility_text = __( 'This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.', 'bootpress' );
+		$utility_text = __( '<p>This entry was posted in %1$s and tagged %2$s on %3$s<span class="by-author"> by %4$s</span>.</p><p>&nbsp;</p>', 'bootpress' );
 	} elseif ( $categories_list ) {
-		$utility_text = __( 'This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.', 'bootpress' );
+		$utility_text = __( '<p>This entry was posted in %1$s on %3$s<span class="by-author"> by %4$s</span>.</p><p>&nbsp;</p>', 'bootpress' );
 	} else {
-		$utility_text = __( 'This entry was posted on %3$s<span class="by-author"> by %4$s</span>.', 'bootpress' );
+		$utility_text = __( '<p>This entry was posted on %3$s<span class="by-author"> by %4$s</span>.</p><p>&nbsp;</p>', 'bootpress' );
 	}
 
 	printf(
@@ -275,6 +295,59 @@ function bootpress_entry_meta() {
 	);
 }
 
+/**
+ * Prints the attached image with a link to the next attached image.
+ *
+ * @since BootPress .1
+ *
+ * @return void
+ */
+function bootpress_the_attached_image() {
+	$post                = get_post();
+	$attachment_size     = apply_filters( 'bootpress_attachment_size', array( 724, 724 ) );
+	$next_attachment_url = wp_get_attachment_url();
+
+	/**
+	 * Grab the IDs of all the image attachments in a gallery so we can get the URL
+	 * of the next adjacent image in a gallery, or the first image (if we're
+	 * looking at the last image in a gallery), or, in a gallery of one, just the
+	 * link to that image file.
+	 */
+	$attachment_ids = get_posts( array(
+		'post_parent'    => $post->post_parent,
+		'fields'         => 'ids',
+		'numberposts'    => -1,
+		'post_status'    => 'inherit',
+		'post_type'      => 'attachment',
+		'post_mime_type' => 'image',
+		'order'          => 'ASC',
+		'orderby'        => 'menu_order ID'
+	) );
+
+	// If there is more than 1 attachment in a gallery...
+	if ( count( $attachment_ids ) > 1 ) {
+		foreach ( $attachment_ids as $attachment_id ) {
+			if ( $attachment_id == $post->ID ) {
+				$next_id = current( $attachment_ids );
+				break;
+			}
+		}
+
+		// get the URL of the next image attachment...
+		if ( $next_id )
+			$next_attachment_url = get_attachment_link( $next_id );
+
+		// or get the URL of the first image attachment.
+		else
+			$next_attachment_url = get_attachment_link( array_shift( $attachment_ids ) );
+	}
+
+	printf( '<a href="%1$s" title="%2$s" rel="attachment">%3$s</a>',
+		esc_url( $next_attachment_url ),
+		the_title_attribute( array( 'echo' => false ) ),
+		wp_get_attachment_image( $post->ID, $attachment_size )
+	);
+}
 /**
  * Theme customizer options.
  *

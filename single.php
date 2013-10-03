@@ -11,8 +11,6 @@ get_header(); ?>
 
   <div id="primary">
       <div class="sidebar-layout">
-        <div class="flank">
-        </div><!--/span-->
         <div id="content" role="main">
           <button id="sidebar-toggle" type="button" data-toggle="offcanvas">Toggle Sidebar</button>
     			<?php while ( have_posts() ) : the_post(); ?>
@@ -22,13 +20,11 @@ get_header(); ?>
     				<?php comments_template( '', true ); ?>
 
     			<?php endwhile; // end of the loop. ?>
-        </div><!--/span-->
+        </div><!-- #content -->
 
         <div id="sidebar-container">
           	<?php get_sidebar(); ?>
-        </div><!--/span-->
-        <div class="flank">
-        </div><!--/span-->
-      </div><!--/row row-offcanvas-right-->
+        </div><!-- #sidebar-container -->
+      </div><!-- .sidebar-layout -->
 
 <?php get_footer(); ?>

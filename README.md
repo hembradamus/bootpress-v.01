@@ -1,0 +1,87 @@
+BootPress
+=========
+
+BootPress is an attempt to reconcile Bootstrap and WordPress as cleanly and scalably as possible.
+
+Custom styles are only introduced where absolute necessary to address Bootstrap/WordPress conflicts (i.e. in the admin section) or provide basic readability for WP elements that lack a direct BS equivalent (and in those cases, BootPress custom styles use dimensions and media query structures already present in Bootstrap to the maximum extent possible). BootPress does not contain any custom styles for the sake of aesthetics or any style or responsiveness solutions from other themes, and aims to provide users with the purest Bootstrap-based foundation possible for custom themes.
+
+In addition to its minimal use of amount non-Bootstrap styles, BootPress manages Bootstrap's classes completely separate from its template files in order to make future Bootstrap updates more painless.
+
+
+Aproach for building BootPress
+WordPress functionality with no styles
+	- Working in SCSS
+	- set up template files
+	- remove all classes from template fiels
+	- set up functions file
+	- EMPTY css files
+	- 
+
+
+
+TO-DOs
+- Add core functions to functions.php
+   - Language support
+   - Image nav debugging
+   - Body classes (sidebar, center column, full)
+- Code sweep ///RELEASE VERSION .01///
+   - Namespace BP classes
+   - Remove comment classes
+- Helpfile
+   - Description of BootPress
+   - BootPress production approach
+   - Using BootPress
+   - Debugging for Bootstrap (add bp_namespace to bp classes)
+   - Moditying the rig object
+- Featured page page-template
+- Theme options
+   - full width option
+   - scroll nav option
+   - fixed-nav option
+   - scroll nav option
+   - scroll w/fixed nav option
+   - toggle vs non-toggle sidebar option
+   - grid view of posts
+   - "full" footer
+   - bootstrap
+   - glyph icons
+- Rightside nav widget bar
+   - collapsing search widget
+   - login forms
+   - WP eCommerce cart compatibility
+- Template-tag-like parts for BS components that can accept custom queries/parameters
+   - Breadcrumbs
+   - Jumbotrons
+Advanced Theme options
+   - lightboxes
+         - images
+         - possibly posts
+   - ajax post display
+   		- loading animations
+   		- lightbox or div replace options
+   		- progress bars
+   		- possible template tas with customizable queries
+   - ajax forms
+   		- alerts
+   		- loading animations
+   		- results
+   		- progress bars
+   		- implement via template tags?
+   	- ajax notifications
+   	    - badges and labels for post and comment notifications
+   	    - social media refresh functions
+- Disabled classes for post-meta-navigation elements
+
+
+Nice to have
+- better/more usable rig structure (would love to set up as simple colon separations)
+- possible php version of rig
+- grid view of posts
+- swipe controls
+
+
+BUGS
+- Comment form errors
+- Child theme incompatability (only loading parent css)
+- Preview pane bugs 
+

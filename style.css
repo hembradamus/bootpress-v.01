@@ -1,15 +1,16 @@
 /*
 Theme Name: BootPress
 Theme URI: 
-Description: BootPress strives to reconcile Bootstrap and WordPress using the least amount of outside elements possible.
-
-Custom styles are only introduced where absolute necessary to address Bootstrap/WordPress conflicts (i.e. in the admin section) or provide basic readability for WP elements that lack a direct BS equivalent (and in those cases, BootPress custom styles use dimensions and media query structures already present in Bootstrap to the maximum extent possible). BootPress does not contain any custom styles for the sake of aesthetics or any style or responsiveness solutions from other themes, and aims to provide users with the purest Bootstrap-based foundation possible for custom themes.
-
-In addition to its minimal use of amount non-Bootstrap styles, BootPress manages Bootstrap's classes completely separate from its template files in order to make future Bootstrap updates more painless.
-Version: .1
-Tags: bootstrap, twitter bootstrap, bootpress, mobile, responsive, two-thirds
 Author: Randy Hembrador
 Author URI: http://randyhembrador.com/
+Description: BootPress strives to offer as "pure-Bootstrap" a starter theme as possible. BootPress only introduces minimal custom styles to reconcile WP and TWBS, and otherwise relies soley on TWBS' as the source of style and respnosiveness. Additionally, BootPress' template files do not directly incorporate TWBS classes to facillitate more painless future TWBS updates.
+Version: .1
+License:
+License URI:
+Tags: bootstrap, twitter bootstrap, bootpress, mobile, responsive, two-thirds
+Text Domain: bootpress
+
+Incoroprates Bootstrap v3.0.0.
 */
 /*!
  * Bootstrap v3.0.0
@@ -4956,71 +4957,10 @@ th.visible-print, td.visible-print {
 
   th.hidden-print, td.hidden-print {
     display: none !important; } }
-/**
- * BootPress Reconciler
- *
- The following styles perform the following functions:
-  - Address Bootstrap conflicts with WordPress admin functions
-  - Provide style for WordPress elements that don't have a direct Bootstrap equivalent
-
- Custom styles use dimensions and media query structures already found in Bootstrap wherever possible (these dimensions/media queries are defined in the file "_bootstrapValues"). 
-
- This theme only introduces original values where some degree of style is necessary for basic readability, and Bootstrap equivalents are completely non-existent (any style containing these types of values can be found in the section "Purely BootPress custom styles")
- *
- * Based on Bootstrap v3.0.0
- *
- */
 /* ==============================================
-    Variables
-============================================== */
-/*--- BootPress Variables ---*/
-/*Bootstrap values (from v3.0.0) ---*/
-/* ==============================================
-    WP Admin fixes
-============================================== */
-body.login {
-  padding-top: 0; }
-
-body.logged-in {
-  padding-top: 118px; }
-  body.logged-in .navbar-fixed-top {
-    top: 28px; }
-
-body.wp-admin {
-  padding-top: 0; }
-  body.wp-admin h3 {
-    font-size: 1.17em; }
-
-/* ==============================================
-    Purely BootPress custom styles
-============================================== */
-body {
-  min-height: 1px;
-  padding-top: 90px; }
-  body .navbar-fixed-top {
-    top: 0; }
-
-.entry-header h1 {
-  max-width: 90%; }
-.entry-header .btn, .entry-header #submit {
-  margin: 32px 0 20px; }
-
-.entry-title-meta {
-  border-bottom: 1pt solid #e5e5e5;
-  border-top: 1pt solid #e5e5e5;
-  clear: both;
-  margin: 2rem 0;
-  padding: 1rem 0; }
-  .entry-title-meta .divider {
-    margin: 0 1rem; }
-
-.post-navigation {
-  border-bottom: 1pt solid #e5e5e5;
-  border-top: 1pt solid #e5e5e5; }
-
-/* ==============================================
-    Bootstrap-based custom styles
-    (based on Bootstrap v3.0.0)
+    Bootstrap-based styles
+    (these use Bootstrap values)
+    based on Bootstrap v3.0.0
 ============================================== */
 /*--- Sidebars ---*/
 .sidebar-nav ul {
@@ -5035,14 +4975,13 @@ body {
   @media screen and (min-width: 1200px) {
     .sidebar-nav ul {
       padding: 0 16px; } }
-.sidebar-nav label, .sidebar-nav h2 {
+.sidebar-nav label, .sidebar-nav h2, .sidebar-nav h3 {
   font-size: 14px;
   font-weight: 500; }
-.sidebar-nav input[type="text"] {
-  width: 100%; }
 
 /*--- Comments ---*/
 li.comment > .comment {
+  border-bottom: 1pt solid #e5e5e5;
   padding: 8px 12px 8px 0; }
   @media screen and (max-width: 480px) {
     li.comment > .comment {
@@ -5065,6 +5004,54 @@ li.comment > .comment {
   @media screen and (min-width: 1200px) {
     .comment-author.vcard {
       margin: 0 16px 0 0; } }
+
+/* ==============================================
+    Purely BootPress custom styles
+    (These use values not found in TWBS)
+============================================== */
+body {
+  min-height: 1px;
+  padding-top: 90px; }
+  body .navbar-fixed-top {
+    top: 0; }
+
+.entry-title-meta {
+  border-bottom: 1pt solid #e5e5e5;
+  border-top: 1pt solid #e5e5e5;
+  clear: both;
+  margin: 2rem 0;
+  padding: 1rem 0; }
+  .entry-title-meta .divider {
+    margin: 0 1rem; }
+
+#paging-navigation, #post-navigation {
+  border-top: 1pt solid #e5e5e5; }
+
+.image-attachment .attachment {
+  text-align: center; }
+  .image-attachment .attachment img {
+    max-width: 100%; }
+
+.site-info a {
+  padding-bottom: 20px; }
+
+/* ==============================================
+    WP Admin fixes
+    (These restore WP Admin/Login styles
+    overwritten by Bootstrap)
+============================================== */
+body.login {
+  padding-top: 0; }
+
+body.logged-in {
+  padding-top: 118px; }
+  body.logged-in .navbar-fixed-top {
+    padding-top: 28px; }
+
+body.wp-admin {
+  padding-top: 0; }
+  body.wp-admin h3 {
+    font-size: 1.17em; }
 
 /* ==============================================
     Official Bootstrap extension styles

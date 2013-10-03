@@ -1,24 +1,18 @@
-/**
- * BootPress Reconciler
- *
- The following styles perform the following functions:
-  - Address Bootstrap conflicts with WordPress admin functions
-  - Provide style for WordPress elements that don't have a direct Bootstrap equivalent
-
- Custom styles use dimensions and media query structures already found in Bootstrap wherever possible (these dimensions/media queries are defined in the file "_bootstrapValues"). 
-
- This theme only introduces original values where some degree of style is necessary for basic readability, and Bootstrap equivalents are completely non-existent (any style containing these types of values can be found in the section "Purely BootPress custom styles")
- *
- * Based on Bootstrap v3.0.0
- *
- */
+//
+ //  BootPress Reconciler
+ //
+ //  The following styles perform the following functions:
+ //   - Address Bootstrap conflicts with WordPress admin functions
+ //   - Provide style for WordPress elements that don't have a direct Bootstrap equivalent
+ //
+ //  Based on Bootstrap v3.0.0
+ //
+//
 
 
-/* ==============================================
-    Variables
-============================================== */
+////////////////////////////// Variables //////////////////////////////
 
-/*--- BootPress Variables ---*/
+///  New BootPress variables ///
 
 //WordPress admin bar height
 $adminHeight: 28px;
@@ -26,21 +20,16 @@ $adminHeight: 28px;
 //Top padding for container
 $bootpressTopPadding: 90px;
 
-//Border styles for major layout elements
+//Border styles
 $bColor: #e5e5e5;
 $bThick: 3pt;
 $bThin: 1pt;
 $thinBorder: $bThin solid $bColor;
 
-/*Bootstrap values (from v3.0.0) ---*/
+///  Bootstrap variables (from v3.0.0) ///
 
 //Typography
-$font-family-sans-serif: 'Helvetica-Neue', Helvetica, Arial, sans-serif;
-$font-family-base: $font-family-sans-serif;
-$font-family-serif: Georgia, 'Times New Roman', Times, serif;
 $font-size-base: 14px;
-$font-family-monospace: Monaco, Menlo, Consolas, 'Courier New', monospace;
-$line-height-base: 1.428571429;
 
 
 // Media query breakpoints
@@ -48,16 +37,6 @@ $screen-xs: 480px;
 $screen-sm: 768px;
 $screen-md: 992px;
 $screen-lg: 1200px;
-
-
-// Container sizes
-$container-tablet: 728px;
-$container-desktop: 940px;
-$container-lg-desktop: 1170px;
-
-
-// Grid system
-$grid-gutter-width: 30px;
 
 
 // Padding
@@ -70,69 +49,10 @@ $padding-small-horizonal: 10px;
 
 
 /* ==============================================
-    WP Admin fixes
+    Bootstrap-based styles
+    (these use Bootstrap values)
+    based on Bootstrap v3.0.0
 ============================================== */
-
-body.login{
-  padding-top: 0;
-}
-body.logged-in{
-  padding-top: $bootpressTopPadding + $adminHeight;
-  .navbar-fixed-top{
-    top: $adminHeight;
-  }
-}
-//Restore WP defaults overwritten by Bootstrap
-body.wp-admin{
-  padding-top: 0;
-  h3{
-    font-size: 1.17em;
-  }
-}
-
-
-/* ==============================================
-    Purely BootPress custom styles
-============================================== */
-
-body{
-  min-height: 1px;
-  padding-top: $bootpressTopPadding;
-  .navbar-fixed-top{
-    top: 0;
-  }
-}
-
-.entry-header{
-  h1{
-    max-width: 90%;
-  }
-  .btn{
-    margin: 32px 0 20px;
-  }
-}
-
-.entry-title-meta{
-  border-bottom: $thinBorder;
-  border-top: $thinBorder;
-  clear: both;
-  margin: 2rem 0;
-  padding: 1rem 0;
-  .divider{
-    margin: 0 1rem;
-  }
-}
-.post-navigation{
-  border-bottom: $thinBorder;
-  border-top: $thinBorder;  
-}
-
-
-/* ==============================================
-    Bootstrap-based custom styles
-    (based on Bootstrap v3.0.0)
-============================================== */
-
 
 /*--- Sidebars ---*/
 .sidebar-nav {
@@ -149,12 +69,9 @@ body{
       padding: 0 $padding-large-horizonal;
     }
   }
-  label, h2{
+  label, h2, h3{
     font-size: $font-size-base;
     font-weight: 500;
-  }
-  input[type="text"]{
-    width: 100%;
   }
 }
 #submit{
@@ -165,6 +82,7 @@ body{
 
 /*--- Comments ---*/
 li.comment > .comment{
+  border-bottom: $thinBorder;
   padding: $padding-base-vertical $padding-base-horizonal $padding-base-vertical  0;
   @media screen and (max-width: $screen-xs){
     padding: $padding-base-vertical $padding-base-horizonal $padding-base-vertical  0;
@@ -189,6 +107,67 @@ li.comment > .comment{
   }
 }
 
+
+/* ==============================================
+    Purely BootPress custom styles
+    (These use values not found in TWBS)
+============================================== */
+
+body{
+  min-height: 1px;
+  padding-top: $bootpressTopPadding;
+  .navbar-fixed-top{
+    top: 0;
+  }
+}
+
+.entry-title-meta{
+  border-bottom: $thinBorder;
+  border-top: $thinBorder;
+  clear: both;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  .divider{
+    margin: 0 1rem;
+  }
+}
+#paging-navigation, #post-navigation {
+  border-top: $thinBorder;  
+}
+.image-attachment .attachment{
+  text-align: center;
+  img {
+    max-width: 100%;
+  }
+}
+
+.site-info a{
+  padding-bottom: 20px;
+}
+
+
+/* ==============================================
+    WP Admin fixes
+    (These restore WP Admin/Login styles
+    overwritten by Bootstrap)
+============================================== */
+
+body.login{
+  padding-top: 0;
+}
+body.logged-in{
+  padding-top: $bootpressTopPadding + $adminHeight;
+  .navbar-fixed-top{
+    padding-top: $adminHeight;
+  }
+}
+//Restore WP defaults overwritten by Bootstrap
+body.wp-admin{
+  padding-top: 0;
+  h3{
+    font-size: 1.17em;
+  }
+}
 
 
 /* ==============================================

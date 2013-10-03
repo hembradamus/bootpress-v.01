@@ -18,25 +18,25 @@
 			<?php the_post_thumbnail(); ?>
 			<?php if ( is_single() ) : ?>
 				<h1 class="entry-title"><?php the_title(); ?></h1>
-				<?php edit_post_link( __( '<button class="edit-link">Edit</button>', 'bootpress' ), '', '' ); ?>
+				<div class="entry-title-meta">
+					<?php bootpress_entry_meta_top(); ?>
+					<?php if ( comments_open() ) : ?>
+						<?php comments_popup_link( '<span class="leave-reply">' . __( 'Leave a reply', 'bootpress' ) . '</span>', __( '<span class="has-replies">1 Reply</span>', 'bootpress' ), __( '<span class="has-replies">% Replies</span>', 'bootpress' ) ); ?>
+					<?php endif; // comments_open() ?>
+				</div>
 			<?php else : ?>
 				<h1 class="entry-title">
 					<a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
 				</h1>
-				<?php edit_post_link( __( '<button class="edit-link">Edit</button>', 'bootpress' ), '', '' ); ?>
 			<?php endif; // is_single() ?>
-			<div class="entry-title-meta">
-				<?php bootpress_entry_meta_top(); ?>
-				<?php if ( comments_open() ) : ?>
-					<?php comments_popup_link( '<span class="leave-reply">' . __( 'Leave a reply', 'bootpress' ) . '</span>', __( '<span class="has-replies">1 Reply</span>', 'bootpress' ), __( '<span class="has-replies">% Replies</span>', 'bootpress' ) ); ?>
-				<?php endif; // comments_open() ?>
-			</div>
 		</header><!-- .entry-header -->
 
 		<?php if ( is_search() ) : // Only display Excerpts for Search ?>
-		<div class="entry-summary">
-			<?php the_excerpt(); ?>
-		</div><!-- .entry-summary -->
+			<div class="excerpt">
+	          <p class="time"><?php the_time(get_option('date_format')); ?></p>
+	          <p><?php the_excerpt(); ?></p>
+	          <p><a class="readmore" href="<?php the_permalink(); ?>">Read More »</a></p>
+			</div><!-- .entry-summary -->
 		<?php else : ?>
 		<div class="entry-content">
 			<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'bootpress' ) ); ?>
@@ -44,6 +44,7 @@
 		</div><!-- .entry-content -->
 		<?php endif; ?>
 
+		<?php if ( is_single() ) : ?>
 		<footer class="entry-footer-meta">
 			<?php bootpress_entry_meta(); ?>
 			<?php if ( is_singular() && get_the_author_meta( 'description' ) && is_multi_author() ) : // If a user has filled out their description and this is a multi-author blog, show a bio on their entries. ?>
@@ -63,4 +64,6 @@
 				</div><!-- .author-info -->
 			<?php endif; ?>
 		</footer><!-- .entry-meta -->
+		<?php else : ?>
+		<?php endif; ?>
 	</article><!-- #post -->

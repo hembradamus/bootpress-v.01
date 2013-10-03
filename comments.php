@@ -31,8 +31,8 @@ if ( post_password_required() )
 	  'cancel_reply_link' => __( 'Cancel Reply' ),
 	  'label_submit'      => __( 'Post Comment' ),
 
-	  'comment_field' =>  '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun' ) .
-	    '</label><textarea id="comment" name="comment" rows="8" aria-required="true">' .
+	  'comment_field' =>  '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun' ) .	
+	    '</label><textarea id="comment" name="comment" rows="8" placeholder="Comment" aria-required="true">' .
 	    '</textarea></p>',
 
 	  'must_log_in' => '<p class="must-log-in">' .
@@ -64,20 +64,20 @@ if ( post_password_required() )
 	    'author' =>
 	      '<p class="comment-form-author">' .
 	      '<label for="author">' . __( 'Name', 'domainreference' ) . '</label> ' .
-	      ( $req ? '<span class="required">*</span>' : '' ) .
-	      '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
+	      ( $req ? '' : '' ) .
+	      '<input id="author" name="author" type="text" placeholder="Name (required)" value="' . esc_attr( $commenter['comment_author'] ) .
 	      '" size="30"' . $aria_req . ' /></p>',
 
 	    'email' =>
 	      '<p class="comment-form-email"><label for="email">' . __( 'Email', 'domainreference' ) . '</label> ' .
-	      ( $req ? '<span class="required">*</span>' : '' ) .
-	      '<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) .
+	      ( $req ? '' : '' ) .
+	      '<input id="email" name="email" type="text" placeholder="Email (required)" value="' . esc_attr(  $commenter['comment_author_email'] ) .
 	      '" size="30"' . $aria_req . ' /></p>',
 
 	    'url' =>
 	      '<p class="comment-form-url"><label for="url">' .
 	      __( 'Website', 'domainreference' ) . '</label>' .
-	      '<input id="url" name="url" type="text" value="' . esc_attr( $commenter['comment_author_url'] ) .
+	      '<input id="url" name="url" type="text" placeholder="Website" value="' . esc_attr( $commenter['comment_author_url'] ) .
 	      '" size="30" /></p>'
 	    )
 	  ),
