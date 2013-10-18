@@ -122,7 +122,6 @@ Nice to have
 
 ### BUGS
 - Comment form errors
-- Child theme incompatability (only loading parent css)
 - Preview pane bugs 
 
 
