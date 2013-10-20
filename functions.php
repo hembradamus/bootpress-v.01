@@ -1,6 +1,6 @@
 <?php
 /**
- * WP-Bootsrap functions and definitions. Content mostly repurposed from 
+ * BootPress functions and definitions. Content mostly repurposed from 
  * the Wordpress Twenty Twelve functions.php file
  *
  * Sets up the theme and provides some helper functions, which are used

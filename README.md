@@ -55,7 +55,7 @@ My hopefully-not-terrible solution for these other issues is something I call th
 
 By having centralized place from which all classes are applied, developer can much more easily and comprehensively see how Bootstrap is being integrated, can hopefully more easily integrate future Bootstrap upgrades, more easily reverse upgrades should they not go well, and continue to control additional Bootstrap integration from (for developers who edit the theme directly).
 
-At the time of this writing, this is the aspect I'm most apprehensive about. As an inexperienced developer, not sure if this method of adding classes is problematic/would definitely be interested in hearing criticisms of this approach for keeping the Bootstrap classes separate from the template files.  2 alternative methods that I have contemplated so far are SCSS and PHP. In the SCSS method, I used a SCSS'S ability for classes to inherit each other's styles via ``@extend`` to create a single stylesheet that operated similarly to the current Rig (users could know where Bootstrap was applied by seeing which ``@extend``s a _BootPress_ class had applied to it. While this method mostly worked, it made the final stylesheet significantly longer, was harder to debug, and broke Bootstrap scripts that relied on actual class names applied to DOM elements. I haven't thought too much of what a PHP solution might look like, but am concerned that doing something similar to the current Rig via PHP would slow the site down since it'd presumably have to execute on the server for every page load.
+At the time of this writing, this is the aspect I'm most apprehensive about. As an inexperienced developer, not sure if this method of adding classes is problematic/would definitely be interested in hearing criticisms of this approach for keeping the Bootstrap classes separate from the template files.  2 alternative methods that I have contemplated so far are SCSS and PHP. In the SCSS method, I used a SCSS'S ability for classes to inherit each other's styles via ``@extend`` to create a single stylesheet that operated similarly to the current Rig (users could know where Bootstrap was applied by seeing which ``@extend``s a _BootPress_ class had applied to it. While this method worked for styling, it also made the final stylesheet significantly longer, was harder to debug, and broke Bootstrap scripts that relied on actual class names applied to DOM elements. I haven't thought too much of what a PHP solution might look like, but am concerned that doing something similar to the current Rig via PHP would slow the site down since it'd presumably have to execute on the server for every page load.
 
 
 
@@ -63,66 +63,6 @@ At the time of this writing, this is the aspect I'm most apprehensive about. As 
 #### Customization and Optimization ####
 Content TBD - (customizing the Rig, BootPress SCSS, Bootstrap LESS, optimization )
 
-
-### Planned Upgrades
-
-- Add core functions to functions.php
-   - Language support
-   - Image nav debugging
-- Code sweep ///RELEASE VERSION .01///
-   - Namespace BP classes
-   - Remove comment classes
-- Featured page page-template
-- Theme options
-   - Body classes (sidebar, center column, full)
-   - scroll nav option
-   - fixed-nav option
-   - scroll nav option
-   - scroll w/fixed nav option (? - depends on whether there is a no dependency solution)
-   - toggle vs non-toggle sidebar option
-   - grid view of posts
-   - "full" footer
-   - bootstrap
-   - glyph icons
-- Rightside nav widget bar
-   - collapsing search widget
-   - login forms
-   - WP eCommerce cart compatibility
-   - Default text presentation for options. Icon if user includes an icon (with sr-label text). options included via dropdown.
-- Template-tag-like parts for BS components that can accept custom queries/parameters
-   - Breadcrumbs
-   - Jumbotrons
-Advanced Theme options
-   - lightboxes
-         - images
-         - possibly posts
-   - ajax post display
-         - loading animations
-         - lightbox or div replace options
-         - progress bars
-         - possible template tas with customizable queries
-   - ajax forms
-         - alerts
-         - loading animations
-         - results
-         - progress bars
-         - implement via template tags?
-      - ajax notifications
-          - badges and labels for post and comment notifications
-          - social media refresh functions
-- Disabled classes for post-meta-navigation elements
-
-
-Nice to have
-- better/more usable rig structure (would love to set up as simple colon separations)
-- possible php version of rig
-- grid view of posts
-- swipe controls
-
-
-### BUGS
-- Comment form errors
-- Preview pane bugs 
 
 
 ### License Info
